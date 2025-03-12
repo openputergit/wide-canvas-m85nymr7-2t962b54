@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Pass</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .bottom-nav-item.active {
+            color: #FF4B4B;
+        }
+
+        .features-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px auto;
+        }
+
+        .carousel-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #fff;
+            opacity: 0.5;
+            margin: 0 3px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        
+        .carousel-indicator.active {
+            opacity: 1;
+        }
+
+        .like-icon:hover {
+            transform: scale(1.1);
+            transition: transform 0.2s;
+        }
+
+        .slide-container {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        
+        .slide {
+            min-width: 100%;
+        }
+
+        .coupon-tag {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #4ECDC4;
+            color: white;
+            padding: 10px;
+            border-radius: 5px 0 0 5px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-weight: 600;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen bg-white">
+    <!-- Header -->
+    <header class="bg-gray-800 text-white flex items-center justify-between p-3">
+        <div class="flex items-center">
+            <i class="bi bi-list text-2xl"></i>
+            <span class="ml-3 text-xl font-semibold">Bharat Pass</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <i class="bi bi-qr-code-scan text-xl"></i>
+            <i class="bi bi-cart text-xl"></i>
+            <div class="relative">
+                <i class="bi bi-bell text-xl"></i>
+                <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">1</span>
+            </div>
+            <i class="bi bi-person-circle text-xl"></i>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="px-3 py-2">
+        <div class="flex items-center bg-gray-100 rounded-full px-3 py-2">
+            <div class="w-8 h-8 rounded-full overflow-hidden mr-2">
+                <img src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1480&q=80" alt="Profile" class="w-full h-full object-cover">
+            </div>
+            <i class="bi bi-search text-gray-500"></i>
+            <input type="text" placeholder="Search anything..." class="bg-transparent border-none outline-none flex-1 px-2">
+            <i class="bi bi-mic text-gray-500"></i>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto pb-16">
+        <!-- Banner Carousel -->
+        <div class="slide-container mx-3 mb-4 rounded-3xl overflow-hidden">
+            <div class="slides" id="bannerSlides">
+                <div class="slide bg-blue-300 h-40 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-2xl font-bold">Banner 1</span>
+                </div>
+                <div class="slide bg-purple-300 h-40 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-2xl font-bold">Banner 2</span>
+                </div>
+                <div class="slide bg-pink-300 h-40 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-2xl font-bold">Banner 3</span>
+                </div>
+                <div class="slide bg-green-300 h-40 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-2xl font-bold">Banner 4</span>
+                </div>
+                <div class="slide bg-orange-300 h-40 rounded-3xl flex items-center justify-center">
+                    <span class="text-white text-2xl font-bold">Banner 5</span>
+                </div>
+            </div>
+            <div class="absolute bottom-2 left-0 right-0 flex justify-center space-x-1" id="carouselIndicators">
+                <div class="carousel-indicator active" data-index="0"></div>
+                <div class="carousel-indicator" data-index="1"></div>
+                <div class="carousel-indicator" data-index="2"></div>
+                <div class="carousel-indicator" data-index="3"></div>
+                <div class="carousel-indicator" data-index="4"></div>
+            </div>
+        </div>
+
+        <!-- Upcoming Events -->
+        <div class="px-3 mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-semibold">Upcoming Events</h2>
+                <a href="#" class="text-yellow-500 flex items-center text-sm">
+                    Show all
+                    <i class="bi bi-chevron-right ml-1"></i>
+                </a>
+            </div>
+            <div class="flex space-x-3 overflow-x-auto pb-2 hide-scrollbar">
+                <!-- Event 1 -->
+                <div class="min-w-[160px] relative">
+                    <div class="rounded-lg overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1545033131-485ea67fd7c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="Event" class="w-full h-36 object-cover">
+                        <button class="absolute top-2 right-2 bg-white bg-opacity-70 rounded-full p-1 like-icon">
+                            <i class="bi bi-heart text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="mt-1">
+                        <p class="text-xs text-red-500">Today at 3:30 PM</p>
+                        <h3 class="font-semibold text-sm">The Romanian - Solo Exhibition</h3>
+                        <div class="flex items-center mt-1">
+                            <i class="bi bi-geo-alt text-gray-500 text-xs"></i>
+                            <p class="text-xs text-gray-500 ml-1">Vicas Art Studio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="min-w-[160px] relative">
+                    <div class="rounded-lg overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="Event" class="w-full h-36 object-cover">
+                        <button class="absolute top-2 right-2 bg-white bg-opacity-70 rounded-full p-1 like-icon">
+                            <i class="bi bi-heart text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="mt-1">
+                        <p class="text-xs text-red-500">Tomorrow at 10:00 - 12:00 AM</p>
+                        <h3 class="font-semibold text-sm">Femme-Broidery Workshop</h3>
+                        <div class="flex items-center mt-1">
+                            <i class="bi bi-geo-alt text-gray-500 text-xs"></i>
+                            <p class="text-xs text-gray-500 ml-1">Hackett Haus of Crafts</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="min-w-[160px] relative">
+                    <div class="rounded-lg overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1581407452212-05a5473d9610?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="Event" class="w-full h-36 object-cover">
+                        <button class="absolute top-2 right-2 bg-white bg-opacity-70 rounded-full p-1 like-icon">
+                            <i class="bi bi-heart text-xl"></i>
+                        </button>
+                    </div>
+                    <div class="mt-1">
+                        <p class="text-xs text-red-500">Today at 6:30 PM</p>
+                        <h3 class="font-semibold text-sm">Hanoi Cafe Showcase</h3>
+                        <div class="flex items-center mt-1">
+                            <i class="bi bi-geo-alt text-gray-500 text-xs"></i>
+                            <p class="text-xs text-gray-500 ml-1">Hanoi Cafe</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="px-3 mb-6">
+            <h2 class="text-lg font-semibold mb-3">Features</h2>
+            <div class="grid grid-cols-4 gap-4">
+                <!-- Feature 1 -->
+                <div class="text-center">
+                    <div class="features-icon bg-pink-500">
+                        <i class="bi bi-chat-dots-fill text-white text-xl"></i>
+                    </div>
+                    <p class="text-xs">Social Media</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="text-center">
+                    <div class="features-icon bg-green-500">
+                        <i class="bi bi-geo-alt-fill text-white text-xl"></i>
+                    </div>
+                    <p class="text-xs">Hyperlocal</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="text-center">
+                    <div class="features-icon bg-yellow-600">
+                        <i class="bi bi-cup-hot-fill text-white text-xl"></i>
+                    </div>
+                    <p class="text-xs">Food Court</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="text-center">
+                    <div class="features-icon bg-pink-400">
+                        <i class="bi bi-chat-square-text-fill text-white text-xl"></i>
+                    </div>
+                    <p class="text-xs">Forum</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="text-center">
+                    <div class="features-icon bg-orange-400">
+                        <i class="bi bi-cart-fill text-white text-xl"></i>
+                    </div>
+                    <p class="text-xs">Shopping</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="text-center">
+                    <div class="features-icon bg-green-400">
+                        <i class="bi bi-basket2-fill text-white text-xl"></i>
+                    </div>
+                    <p class="text-xs">Grocery</p>
+                </div>
+
+                <!-- Feature 7 -->
+                <div class="text-center">
+                    <div class="features-icon bg-blue-300">
+                        <i class="bi bi-calendar-event-fill text-white text-xl"></i>
+                    </div>
+                    <p class="text-xs">Events</p>
+                </div>
+
+                <!-- Feature 8 -->
+                <div class="text-center">
+                    <div class="features-icon bg-yellow-300">
+                        <i class="bi bi-percent text-white text-xl"></i>
+                    </div>
+                    <p class="text-xs">Coupons</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Finance & Accounts -->
+        <div class="px-3 mb-6">
+            <h2 class="text-lg font-semibold mb-3">Finance & accounts</h2>
+            <div class="flex justify-between">
+                <!-- Finance 1 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center mx-auto">
+                        <i class="bi bi-receipt text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">Accounting</p>
+                </div>
+
+                <!-- Finance 2 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center mx-auto">
+                        <i class="bi bi-plus-lg text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">Add</p>
+                </div>
+
+                <!-- Finance 3 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center mx-auto">
+                        <i class="bi bi-qr-code text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">Scan to Pay</p>
+                </div>
+
+                <!-- Finance 4 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center mx-auto">
+                        <i class="bi bi-currency-exchange text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">Forex</p>
+                </div>
+
+                <!-- Finance 5 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center mx-auto">
+                        <i class="bi bi-question-circle text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">Balance</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Services -->
+        <div class="px-3 mb-6">
+            <h2 class="text-lg font-semibold mb-3">Emergency Services</h2>
+            <div class="flex justify-between">
+                <!-- Emergency 1 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mx-auto">
+                        <i class="bi bi-paw text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">Pet Care</p>
+                </div>
+
+                <!-- Emergency 2 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mx-auto">
+                        <i class="bi bi-car-front text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">Police</p>
+                </div>
+
+                <!-- Emergency 3 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mx-auto">
+                        <i class="bi bi-plus-circle text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">Medical</p>
+                </div>
+
+                <!-- Emergency 4 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mx-auto">
+                        <i class="bi bi-fire text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">Fire</p>
+                </div>
+
+                <!-- Emergency 5 -->
+                <div class="text-center">
+                    <div class="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mx-auto">
+                        <i class="bi bi-exclamation-triangle text-gray-600 text-xl"></i>
+                    </div>
+                    <p class="text-xs mt-1">SOS</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promotion Card -->
+        <div class="px-3 mb-6">
+            <div class="bg-green-50 rounded-xl p-4 relative">
+                <div class="coupon-tag">GET MORE SAVE MORE</div>
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-sm text-gray-600">Tapan Store</p>
+                        <p class="text-xs text-gray-400">Singh More, Ranchi</p>
+                        <h3 class="text-2xl font-bold mt-2">Happy Weekend</h3>
+                        <div class="font-bold text-3xl">25% OFF</div>
+                        <p class="text-xs text-gray-600 mt-1">*on All Items*</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60" alt="Grocery" class="w-32 h-32 object-cover">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-gray-800 text-white flex justify-around items-center py-3 max-w-[500px] mx-auto">
+        <a href="#" class="bottom-nav-item active flex flex-col items-center">
+            <i class="bi bi-house-door-fill text-xl"></i>
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="#" class="bottom-nav-item flex flex-col items-center text-gray-400">
+            <i class="bi bi-currency-rupee text-xl"></i>
+            <span class="text-xs mt-1">Pay</span>
+        </a>
+        <a href="#" class="bottom-nav-item flex flex-col items-center text-gray-400">
+            <i class="bi bi-bell text-xl"></i>
+            <span class="text-xs mt-1">Cash</span>
+        </a>
+        <a href="#" class="bottom-nav-item flex flex-col items-center text-gray-400">
+            <i class="bi bi-person text-xl"></i>
+            <span class="text-xs mt-1">History</span>
+        </a>
+        <a href="#" class="bottom-nav-item flex flex-col items-center text-gray-400">
+            <i class="bi bi-grid-3x3-gap-fill text-xl"></i>
+            <span class="text-xs mt-1">Menu</span>
+        </a>
+    </nav>
+
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slidesContainer = document.getElementById('bannerSlides');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            const slideCount = 5;  // Number of slides
+            let currentIndex = 0;
+
+            // Set up click handlers for indicators
+            indicators.forEach(indicator => {
+                indicator.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    goToSlide(index);
+                });
+            });
+
+            // Auto slide change
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % slideCount;
+                goToSlide(currentIndex);
+            }, 5000);
+
+            function goToSlide(index) {
+                // Update slides position
+                slidesContainer.style.transform = `translateX(-${index * 100}%)`;
+                
+                // Update indicators
+                indicators.forEach((indicator, i) => {
+                    if (i === index) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+
+                currentIndex = index;
+            }
+
+            // Add click event for like buttons
+            const likeButtons = document.querySelectorAll('.like-icon');
+            likeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('bi-heart')) {
+                        icon.classList.remove('bi-heart');
+                        icon.classList.add('bi-heart-fill');
+                        icon.style.color = '#FF4B4B';
+                    } else {
+                        icon.classList.remove('bi-heart-fill');
+                        icon.classList.add('bi-heart');
+                        icon.style.color = '';
+                    }
+                });
+            });
+        });
+
+        // Generate a random user ID and store it if not already present
+        function getUserId() {
+            let userId = localStorage.getItem('bharatPassUserId');
+            if (!userId) {
+                userId = 'user_' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('bharatPassUserId', userId);
+            }
+            return userId;
+        }
+
+        const userId = getUserId();
+        const appSlug = 'bharat-pass-app-234567';
+        
+        // Example function to fetch upcoming events from database
+        async function fetchUpcomingEvents() {
+            try {
+                const response = await fetch('https://r0c8kgwocscg8gsokogwwsw4.zetaverse.one/mongodb', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer XheWT820aranjHawxVqezIVzei83'
+                    },
+                    body: JSON.stringify({
+                        appSlug: appSlug,
+                        action: 'read',
+                        collection: 'events',
+                        conditions: {
+                            status: 'active'
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    return data.result.read;
+                }
+                return [];
+            } catch (error) {
+                console.error("Error fetching events:", error);
+                return [];
+            }
+        }
+
+        // Function to save user preferences (like favorite events)
+        async function saveFavorite(eventId, isFavorite) {
+            try {
+                const response = await fetch('https://r0c8kgwocscg8gsokogwwsw4.zetaverse.one/mongodb', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer XheWT820aranjHawxVqezIVzei83'
+                    },
+                    body: JSON.stringify({
+                        appSlug: appSlug,
+                        action: 'update',
+                        collection: 'user_preferences',
+                        conditions: {
+                            userId: userId,
+                            eventId: eventId
+                        },
+                        data: {
+                            userId: userId,
+                            eventId: eventId,
+                            isFavorite: isFavorite,
+                            updatedAt: new Date().toISOString()
+                        }
+                    })
+                });
+                
+                const data = await response.json();
+                return data.success;
+            } catch (error) {
+                console.error("Error saving favorite:", error);
+                return false;
+            }
+        }
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
